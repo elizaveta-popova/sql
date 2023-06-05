@@ -29,7 +29,6 @@ sky_pro=# SELECT * FROM employee;
   2 | Max        | Jonson    | male   |  45
   3 | Dane       | Corwall   | male   |  30
 (3 ёЄЁюъш)
-
 sky_pro=#  UPDATE employee SET first_name = 'John', last_name = 'Wilson', gender = 'male', age = 34 WHERE id = 1;
 UPDATE 1
 sky_pro=# SELECT * FROM employee;
@@ -39,7 +38,6 @@ sky_pro=# SELECT * FROM employee;
   3 | Dane       | Corwall   | male   |  30
   1 | John       | Wilson    | male   |  34
 (3 ёЄЁюъш)
-
 sky_pro=# DELETE FROM employee WHERE id = 2;
 DELETE 1
 sky_pro=# SELECT * FROM employee;
