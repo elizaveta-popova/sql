@@ -140,3 +140,103 @@ sky_pro=# SELECT first_name, MAX (age) FROM employee GROUP BY first_name HAVING 
  Dane       |  34
  Anne       |  50
 (2 ёЄЁюъш)
+
+//hw3
+    sky_pro=# CREATE TABLE city (city_id BIGSERIAL NOT NULL PRIMARY KEY, city_name VARCHAR(60) NOT NULL);
+    CREATE TABLE
+
+    sky_pro=# ALTER TABLE employee ADD city_id INT;
+    ALTER TABLE
+
+    sky_pro=# ALTER TABLE employee ADD CONSTRAINT city_id FOREIGN KEY (city_id) REFERENCES city (city_id);
+    ALTER TABLE
+
+    sky_pro=# INSERT INTO city (city_name) VALUES ('Paris');
+    INSERT 0 1
+    sky_pro=# INSERT INTO city (city_name) VALUES ('London');
+    INSERT 0 1
+    sky_pro=# INSERT INTO city (city_name) VALUES ('Tokio');
+    INSERT 0 1
+    sky_pro=# INSERT INTO city (city_name) VALUES ('Berlin');
+    INSERT 0 1
+    sky_pro=# INSERT INTO city (city_name) VALUES ('Moscow');
+    INSERT 0 1
+
+    sky_pro=# UPDATE employee SET city_id=1 WHERE id=4;
+    UPDATE 1
+    sky_pro=# UPDATE employee SET city_id=2 WHERE id=3;
+    UPDATE 1
+    sky_pro=# UPDATE employee SET city_id=4 WHERE id=2;
+    UPDATE 1
+    sky_pro=# UPDATE employee SET city_id=5 WHERE id=1;
+    UPDATE 1
+    sky_pro=# SELECT * FROM employee;
+    id | first_name | last_name | gender | age | city_id
+----+------------+-----------+--------+-----+---------
+    5 | John       | Wilson    | male   |  52 |
+    4 | Anne       | Pitt      | female |  23 |       1
+    3 | Dane       | Corwall   | male   |  30 |       2
+    2 | Max        | Jonson    | male   |  45 |       4
+    1 | Kate       | Smith     | female |  25 |       5
+(5 ёЄЁюъ)
+
+    sky_pro=# SELECT first_name, last_name, city_name FROM employee INNER JOIN city ON employee.city_id=city.city_id;
+    first_name | last_name | city_name
+------------+-----------+-----------
+    Anne       | Pitt      | Paris
+    Dane       | Corwall   | London
+    Max        | Jonson    | Berlin
+    Kate       | Smith     | Moscow
+(4 ёЄЁюъш)
+
+
+    sky_pro=# SELECT first_name, last_name, city_name FROM employee LEFT JOIN city ON employee.city_id=city.city_id;
+    first_name | last_name | city_name
+------------+-----------+-----------
+    John       | Wilson    |
+    Anne       | Pitt      | Paris
+    Dane       | Corwall   | London
+    Max        | Jonson    | Berlin
+    Kate       | Smith     | Moscow
+(5 ёЄЁюъ)
+
+    sky_pro=# SELECT first_name, city_name FROM employee FULL JOIN city ON employee.city_id=city.city_id;
+    first_name | city_name
+------------+-----------
+    John       |
+    Anne       | Paris
+    Dane       | London
+    Max        | Berlin
+    Kate       | Moscow
+    | Tokio
+(6 ёЄЁюъ)
+
+    sky_pro=# SELECT first_name, city_name FROM employee CROSS JOIN city;
+    first_name | city_name
+------------+-----------
+    John       | Paris
+    Anne       | Paris
+    Dane       | Paris
+    Max        | Paris
+    Kate       | Paris
+    John       | London
+    Anne       | London
+    Dane       | London
+    Max        | London
+    Kate       | London
+    John       | Tokio
+    Anne       | Tokio
+    Dane       | Tokio
+    Max        | Tokio
+    Kate       | Tokio
+    John       | Berlin
+    Anne       | Berlin
+    Dane       | Berlin
+    Max        | Berlin
+    Kate       | Berlin
+    John       | Moscow
+    Anne       | Moscow
+    Dane       | Moscow
+    Max        | Moscow
+    Kate       | Moscow
+(25 ёЄЁюъ)
